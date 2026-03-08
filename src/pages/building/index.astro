@@ -16,10 +16,10 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     </h1>
 
     <p class="text-lg text-text-medium dark:text-dark-text-medium leading-relaxed mb-10 max-w-2xl">
-      All three projects explore the same idea: AI gets dramatically more useful with persistent, structured context. A second mind that knows your ongoing situation.
+      My current projects explore the same idea: AI gets dramatically more useful with persistent, structured context. A second mind that knows your ongoing situation.
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {projects.map((project) => (
         <ProjectCard
           slug={project.id.replace(/\.mdx?$/, '')}
