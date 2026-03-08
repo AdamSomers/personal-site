@@ -1,0 +1,48 @@
+---
+interface Props {
+  era: string;
+  years: string;
+  headline: string;
+  detail: string;
+  index: number;
+  isLast?: boolean;
+}
+
+const { era, years, headline, detail, index, isLast = false } = Astro.props;
+const dir = index % 2 === 0 ? 1 : -1;
+---
+
+<div class="relative pl-10 pb-8 group" data-timeline-node>
+  <!-- Dot -->
+  <div class="absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full border-2 border-accent bg-bg group-hover:bg-accent transition-colors z-10"></div>
+
+  <!-- Sine wave connector to next dot -->
+  {!isLast && (
+    <svg
+      class="absolute left-[7.5px] top-[15px] w-0 overflow-visible pointer-events-none z-0"
+      style="height: calc(100% - 15px);"
+      data-sine-connector
+      data-dir={dir}
+      aria-hidden="true"
+    >
+      <!-- Redrawn by script to fit actual height -->
+    </svg>
+  )}
+
+  <!-- Content -->
+  <div class="cursor-pointer" data-timeline-trigger>
+    <div class="flex items-baseline gap-3 mb-1">
+      <h3 class="font-heading font-semibold text-text group-hover:text-accent transition-colors">{era}</h3>
+      <span class="text-xs text-text-muted">{years}</span>
+    </div>
+    <p class="text-sm text-text-medium leading-relaxed">{headline}</p>
+  </div>
+
+  <div class="hidden mt-3 text-sm text-text-medium leading-relaxed" data-timeline-detail>
+    <div class="pl-4 border-l-2 border-bg-deep">
+      <Fragment set:html={detail} />
+    </div>
+  </div>
+
+  <span class="inline-block mt-2 text-xs text-accent cursor-pointer" data-timeline-trigger>Click to expand</span>
+</div>

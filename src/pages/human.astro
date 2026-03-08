@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const ccrmProjects = [
+  { name: 'AirHarp', desc: 'Motion-controlled virtual harp (Leap Motion)' },
+  { name: 'Touchboard', desc: 'Physical instrument exploring interaction and beauty' },
+  { name: 'Frankolin', desc: 'Electric violin with 11 sensors for gesture capture' },
+  { name: 'SoundPrism', desc: 'Real-time audio visualizer (spectrum, waterfall, oscilloscope)' },
+  { name: 'Insaniac', desc: 'Generative art / granular synthesis instrument' },
+  { name: 'CrazyVerb', desc: 'Reverb plugin with order-16 feedback delay network' },
+  { name: 'MusKit', desc: 'C++ SDK for audio software development' },
+];
+---
+
+<BaseLayout title="Human — Adam Somers" description="Music, trail running, tinkering, family.">
+  <div class="max-w-3xl mx-auto px-6 py-12">
+    <Breadcrumb items={[{ label: 'Human' }]} />
+
+    <div class="flex flex-col sm:flex-row items-start gap-6 mb-10">
+      <div class="flex-1">
+        <h1 class="font-heading text-3xl sm:text-4xl font-bold mb-3 text-text">Human</h1>
+        <p class="text-lg text-text-medium leading-relaxed">
+          Beyond the work.
+        </p>
+      </div>
+      <img
+        src="/images/tinkering.PNG"
+        alt="Illustration of a person tinkering at a workbench with a robot companion"
+        class="w-40 sm:w-48 opacity-70 mix-blend-multiply"
+      />
+    </div>
+
+    <div class="space-y-8">
+
+      <!-- Music -->
+      <section class="p-6 rounded-[10px] border border-border bg-bg">
+        <h2 class="font-heading text-lg font-semibold text-text mb-3">Music</h2>
+        <p class="text-sm text-text-medium leading-relaxed mb-3">
+          I produce trance music. I have a home studio where the line between engineering and art disappears. Built a custom DJ application for a friend — a professional psytrance DJ who tours globally and uses my software on stage.
+        </p>
+        <p class="text-sm text-text-muted">
+          Music player coming soon — a few tracks from the studio.
+        </p>
+      </section>
+
+      <!-- Trail Running -->
+      <section class="p-6 rounded-[10px] border border-border bg-bg">
+        <h2 class="font-heading text-lg font-semibold text-text mb-3">Trail Running</h2>
+        <p class="text-sm text-text-medium leading-relaxed">
+          I train for ultra marathons on Bay Area trails. The Fitness AI project grew directly out of this — a real tool for a demanding discipline, not a demo project. Strength training at home complements the miles.
+        </p>
+      </section>
+
+      <!-- Tinkering / CCRMA -->
+      <section class="p-6 rounded-[10px] border border-border bg-bg">
+        <h2 class="font-heading text-lg font-semibold text-text mb-3">Tinkering</h2>
+        <p class="text-sm text-text-medium leading-relaxed mb-4">
+          Despite being a senior manager, I still build things with my hands. The Stanford CCRMA portfolio represents years of instruments, plugins, and audio experiments at the intersection of music and technology.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {ccrmProjects.map(({ name, desc }) => (
+            <div class="p-3 rounded-[6px] bg-bg-sand">
+              <span class="text-sm font-medium text-text">{name}</span>
+              <span class="text-xs text-text-muted block mt-0.5">{desc}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-xs text-text-muted mt-3">
+          <a href="https://ccrma.stanford.edu/~adam/portfolio/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">
+            Full CCRMA portfolio &rarr;
+          </a>
+        </p>
+      </section>
+
+      <!-- Family -->
+      <section class="p-6 rounded-[10px] border border-border bg-bg">
+        <h2 class="font-heading text-lg font-semibold text-text mb-3">Family</h2>
+        <p class="text-sm text-text-medium leading-relaxed">
+          I live in Los Gatos with my family.
+        </p>
+      </section>
+
+    </div>
+  </div>
+</BaseLayout>

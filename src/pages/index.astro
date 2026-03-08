@@ -1,33 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GenerativeWaveform from '../components/GenerativeWaveform.tsx';
-
-const sections = [
-  {
-    href: '/building',
-    title: 'Building',
-    description: 'Three AI projects exploring persistent context as a second mind.',
-    icon: '&#9881;',
-  },
-  {
-    href: '/journey',
-    title: 'Journey',
-    description: 'CalArts BFA to Apple SEM — the scenic route.',
-    icon: '&#10148;',
-  },
-  {
-    href: '/thinking',
-    title: 'Thinking',
-    description: 'On AI augmentation, creative leadership, and how I lead.',
-    icon: '&#9672;',
-  },
-  {
-    href: '/human',
-    title: 'Human',
-    description: 'Music, trail running, tinkering, family.',
-    icon: '&#9835;',
-  },
-];
 ---
 
 <BaseLayout title="Adam Somers — Creative Technologist">
@@ -36,38 +9,109 @@ const sections = [
     <GenerativeWaveform client:idle />
 
     <div class="relative z-10 max-w-5xl mx-auto px-6 pt-12 pb-16">
-      <div class="max-w-2xl">
-        <h1 class="font-heading text-4xl sm:text-5xl font-bold leading-tight mb-6 text-text dark:text-dark-text">
-          Building AI tools that enhance your thinking.
-        </h1>
-        <p class="text-lg sm:text-xl text-text-medium dark:text-dark-text-medium leading-relaxed">
-          Learn about my projects and me.
-        </p>
+      <div class="flex flex-col sm:flex-row items-center gap-8">
+        <div class="max-w-2xl flex-1">
+          <h1 class="font-heading text-4xl sm:text-5xl font-bold leading-tight mb-6 text-text">
+            Building AI tools that enhance your thinking.
+          </h1>
+          <p class="text-lg sm:text-xl text-text-medium leading-relaxed">
+            Learn about my projects and me.
+          </p>
+        </div>
+        <img
+          src="/images/coding.PNG"
+          alt="Illustration of a person coding with headphones"
+          class="w-44 sm:w-56 opacity-60 mix-blend-multiply"
+        />
       </div>
     </div>
   </section>
 
-  <!-- Section Entry Points -->
-  <section class="max-w-5xl mx-auto px-6 pt-12 pb-24">
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {sections.map(({ href, title, description, icon }) => (
-        <a
-          href={href}
-          class="group block p-6 rounded-[10px] border border-border dark:border-dark-border bg-bg dark:bg-dark-bg hover:bg-bg-sand dark:hover:bg-dark-bg-sand hover:-translate-y-0.5 hover:shadow-md transition-all duration-200"
-        >
-          <div class="flex items-start gap-4">
-            <span class="text-2xl text-accent dark:text-dark-accent mt-0.5" set:html={icon} />
-            <div>
-              <h2 class="font-heading text-lg font-semibold text-text dark:text-dark-text group-hover:text-accent dark:group-hover:text-dark-accent transition-colors mb-1">
-                {title}
-              </h2>
-              <p class="text-sm text-text-medium dark:text-dark-text-medium leading-relaxed">
-                {description}
-              </p>
-            </div>
-          </div>
+  <!-- Content Sections -->
+  <div class="max-w-5xl mx-auto px-6 pt-12 pb-24 space-y-6">
+
+    <!-- Building -->
+    <section class="p-6 sm:p-8 rounded-[10px] border border-border bg-bg">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-heading text-xl font-semibold text-text">What I'm Building</h2>
+        <a href="/building" class="text-sm text-accent hover:underline">Explore &rarr;</a>
+      </div>
+      <p class="text-text-medium leading-relaxed mb-5">
+        All three projects explore the same idea: AI gets dramatically more useful with persistent, structured context. A second mind that knows your ongoing situation.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <a href="/building/practicepal" class="group block p-4 rounded-[6px] bg-bg-sand hover:bg-bg-deep transition-colors">
+          <h3 class="font-heading font-semibold text-text group-hover:text-accent transition-colors mb-1">PracticePal</h3>
+          <p class="text-sm text-text-medium leading-relaxed">AI music practice companion that remembers your goals, repertoire, and progress across sessions.</p>
         </a>
-      ))}
+        <a href="/building/fitness-ai" class="group block p-4 rounded-[6px] bg-bg-sand hover:bg-bg-deep transition-colors">
+          <h3 class="font-heading font-semibold text-text group-hover:text-accent transition-colors mb-1">Fitness AI</h3>
+          <p class="text-sm text-text-medium leading-relaxed">Personalized AI trainer that knows your equipment, injuries, and full training history. No more starting from zero.</p>
+        </a>
+        <a href="/building/lead" class="group block p-4 rounded-[6px] bg-bg-sand hover:bg-bg-deep transition-colors">
+          <h3 class="font-heading font-semibold text-text group-hover:text-accent transition-colors mb-1">Lead</h3>
+          <p class="text-sm text-text-medium leading-relaxed">AI-augmented management OS. Persistent file-backed context that makes leadership thinking more durable and grounded.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Journey -->
+    <section class="p-6 sm:p-8 rounded-[10px] border border-border bg-bg">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-heading text-xl font-semibold text-text">Journey</h2>
+        <a href="/journey" class="text-sm text-accent hover:underline">Full timeline &rarr;</a>
+      </div>
+      <p class="text-text-medium leading-relaxed mb-5">
+        Careers don't have to move in a straight line. Mine went from a music technology BFA to senior engineering management at Apple — through audio plugins, a startup, VR pioneering, and big tech. Every pivot built on what came before.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">CalArts BFA</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">&rarr;</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">Audio DSP</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">&rarr;</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">Stanford CCRMA</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">&rarr;</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">Universal Audio</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">&rarr;</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">Startup Founder</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">&rarr;</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">Jaunt VR</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">&rarr;</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">Meta</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-sand text-text-medium">&rarr;</span>
+        <span class="text-xs px-3 py-1.5 rounded-[3px] bg-bg-deep text-text font-medium">Apple</span>
+      </div>
+    </section>
+
+    <!-- Thinking + Human side by side -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- Thinking -->
+      <section class="p-6 sm:p-8 rounded-[10px] border border-border bg-bg">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-heading text-xl font-semibold text-text">Thinking</h2>
+          <a href="/thinking" class="text-sm text-accent hover:underline">Read more &rarr;</a>
+        </div>
+        <ul class="space-y-3 text-sm text-text-medium leading-relaxed">
+          <li><strong class="text-text">AI as a second mind.</strong> Persistent context turns AI from ask-a-question into a system that compounds your thinking over time.</li>
+          <li><strong class="text-text">Creative people make great leaders.</strong> Empathy, vision, taste, comfort with ambiguity — the arts background isn't a detour.</li>
+          <li><strong class="text-text">Growth by stretching.</strong> Assign people into unexpected areas. The only way to grow is beyond where you're comfortable.</li>
+        </ul>
+      </section>
+
+      <!-- Human -->
+      <section class="p-6 sm:p-8 rounded-[10px] border border-border bg-bg">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-heading text-xl font-semibold text-text">Human</h2>
+          <a href="/human" class="text-sm text-accent hover:underline">More &rarr;</a>
+        </div>
+        <ul class="space-y-3 text-sm text-text-medium leading-relaxed">
+          <li><strong class="text-text">Music.</strong> I produce trance music. Built a DJ app for a friend who tours globally with it.</li>
+          <li><strong class="text-text">Trail running.</strong> I train for ultra marathons on Bay Area trails.</li>
+          <li><strong class="text-text">Tinkering.</strong> Stanford CCRMA portfolio of instruments, plugins, and audio tools. Still building with my hands.</li>
+          <li><strong class="text-text">Family.</strong> I live in Los Gatos with my family.</li>
+        </ul>
+      </section>
     </div>
-  </section>
+
+  </div>
 </BaseLayout>

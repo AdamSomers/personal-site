@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import TimelineNode from '../components/TimelineNode.astro';
+
+const timeline = [
+  {
+    era: 'The Spark',
+    years: '2002–2006',
+    headline: 'CalArts — BFA in Music Technology. Discovered the joy of building tools for other artists.',
+    detail: '<p>Under the mentorship of Tom Erbe (creator of SoundHack), I fell in love with C++ and realized that toolmaking was itself a creative act. I read John Cage and Kernighan & Ritchie on the same day — art and technology were two parts of a whole.</p>',
+  },
+  {
+    era: 'The Craft',
+    years: '2006–2008',
+    headline: 'Built audio software for film composers and music producers while studying CS.',
+    detail: '<p>First job out of CalArts was building custom software for a film composer. Worked on DVZ Strings (orchestral sample library) and Beat Thang Virtual while pursuing CS coursework at UCLA and CSUN. Filling in fundamentals while already shipping professional software.</p>',
+  },
+  {
+    era: 'The Lab',
+    years: '2008–2010',
+    headline: 'Stanford CCRMA — MA at the intersection of music, science, and technology.',
+    detail: '<p>Built a portfolio of instruments, plugins, and interactive audio projects: physical instruments with sensors, audio visualizers, granular synthesis tools, and MusKit — a C++ SDK for audio software that became the foundation for later projects.</p>',
+  },
+  {
+    era: 'The Dream Job',
+    years: '2010–2012',
+    headline: 'Universal Audio — Led the 64-bit migration across 60 plugin products.',
+    detail: '<p>Hired to solve the problem nobody else wanted: migrating from Metrowerks CodeWarrior and QuickDraw APIs to modern macOS. Built automated audio and visual parity testing, recruited and led a team, completed the mission over two years. Earned the nickname "Adam \'64-bit\' Somers" and the company\'s Rockstar award.</p>',
+  },
+  {
+    era: 'The Leap',
+    years: '2012–2013',
+    headline: 'Founded Handwavy — motion-controlled instruments that got press from Engadget to Wikipedia.',
+    detail: '<p>A weekend hack with Leap Motion became AirHarp, which went viral and led to a company. Launch partner for Leap Motion\'s app store, spoke at Maker Faire, built a small team. The hardware market didn\'t materialize, but the experience taught lessons about startups, business, and conviction.</p>',
+  },
+  {
+    era: 'The Rocket Ship',
+    years: '2014–2019',
+    headline: 'Jaunt VR — First engineering hire. Built the tech, then led half the company.',
+    detail: '<p>Joined three co-founders in a Palo Alto office. Built playback apps, production tools, and the spatial audio pipeline. Worked on Paul McCartney\'s spatial audio experience, visited Skywalker Ranch, specified the Ambisonic format used across all productions. Grew from principal engineer to VP overseeing roughly half the company. Led through both the growth and the contraction when VR hype receded.</p>',
+  },
+  {
+    era: 'The Scale',
+    years: '2019–2023',
+    headline: 'Meta — Grew a team from 5 to 20+ engineers building audio infrastructure used by billions.',
+    detail: '<p>Built an internal audio SDK that became ubiquitous across Facebook, WhatsApp, and all Reality Labs products. Drove VOIP latency in XR down to real-life levels — an initiative originally championed by John Carmack. Grew from line manager to senior manager, learning to build conviction with stakeholders across competing organizations.</p>',
+  },
+  {
+    era: 'The Pivot',
+    years: '2023–present',
+    headline: 'Apple — Deliberately pivoted from audio/XR into AI evaluation infrastructure.',
+    detail: '<p>A deliberate career move, not a drift. Building systems that measure whether AI features actually work before they ship. The biggest surprise: how data-oriented AI evaluation is. Learned to think in terms of datasets ("the content") alongside the software systems ("the conduit") — a new mental model after years in pure software.</p>',
+  },
+  {
+    era: 'The Thesis',
+    years: '2024–present',
+    headline: 'Building AI tools on nights and weekends — exploring persistent context as a second mind.',
+    detail: '<p>Three projects (PracticePal, Fitness AI, Lead) all exploring the same idea: AI gets dramatically more useful with structured, accumulated context rather than starting from zero each conversation. All built entirely with Claude Code — practicing what I preach about AI as collaborator.</p>',
+  },
+];
+---
+
+<BaseLayout title="Journey — Adam Somers" description="CalArts BFA to Apple SEM — the scenic route through audio, startups, VR, and AI.">
+  <div class="max-w-3xl mx-auto px-6 py-12">
+    <Breadcrumb items={[{ label: 'Journey' }]} />
+
+    <!-- Header with illustration -->
+    <div class="flex flex-col sm:flex-row items-start gap-6 mb-10">
+      <div class="flex-1">
+        <h1 class="font-heading text-3xl sm:text-4xl font-bold mb-3 text-text">Journey</h1>
+        <p class="text-lg text-text-medium leading-relaxed">
+          Careers don't have to move in a straight line — and the zigzag can be more rewarding than the straight path.
+        </p>
+      </div>
+      <img
+        src="/images/jauntvr.PNG"
+        alt="Illustration of a person with a laptop, VR camera, and whimsical dinosaur"
+        class="w-40 sm:w-48 opacity-70 mix-blend-multiply"
+      />
+    </div>
+
+    <!-- Timeline -->
+    <div class="mt-8">
+      {timeline.map((node, i) => (
+        <TimelineNode
+          era={node.era}
+          years={node.years}
+          headline={node.headline}
+          detail={node.detail}
+          index={i}
+          isLast={i === timeline.length - 1}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Expand/collapse — redraw connector after toggle
+  document.querySelectorAll('[data-timeline-trigger]').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const node = trigger.closest('[data-timeline-node]');
+      const detail = node?.querySelector('[data-timeline-detail]');
+      if (detail) {
+        detail.classList.toggle('hidden');
+        requestAnimationFrame(drawAllConnectors);
+      }
+    });
+  });
+
+  function drawAllConnectors() {
+    document.querySelectorAll('[data-sine-connector]').forEach((svg) => {
+      const h = svg.getBoundingClientRect().height;
+      if (h < 1) return;
+
+      const amp = 8;
+      // 2 full sine cycles using many small line segments
+      const steps = 40;
+      const points: string[] = [];
+      for (let i = 0; i <= steps; i++) {
+        const t = i / steps;
+        const x = Math.sin(t * Math.PI * 4) * amp; // 4 half-cycles = 2 full cycles
+        const y = t * h;
+        points.push(`${i === 0 ? 'M' : 'L'} ${x} ${y}`);
+      }
+      const d = points.join(' ');
+
+      svg.setAttribute('viewBox', `${-amp - 2} 0 ${amp * 2 + 4} ${h}`);
+
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('stroke', '#D8DCE4');
+      path.setAttribute('stroke-width', '1.5');
+      path.setAttribute('fill', 'none');
+      svg.appendChild(path);
+    });
+  }
+
+  drawAllConnectors();
+  window.addEventListener('resize', drawAllConnectors);
+</script>
