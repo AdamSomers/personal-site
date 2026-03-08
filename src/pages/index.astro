@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GenerativeWaveform from '../components/GenerativeWaveform.tsx';
+
+const sections = [
+  {
+    href: '/building',
+    title: 'Building',
+    description: 'Three AI projects exploring persistent context as a second mind.',
+    icon: '&#9881;',
+  },
+  {
+    href: '/journey',
+    title: 'Journey',
+    description: 'CalArts BFA to Apple SEM — the scenic route.',
+    icon: '&#10148;',
+  },
+  {
+    href: '/thinking',
+    title: 'Thinking',
+    description: 'On AI augmentation, creative leadership, and how I lead.',
+    icon: '&#9672;',
+  },
+  {
+    href: '/human',
+    title: 'Human',
+    description: 'Music, trail running, tinkering, family.',
+    icon: '&#9835;',
+  },
+];
+---
+
+<BaseLayout title="Adam Somers — Creative Technologist">
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <GenerativeWaveform client:idle />
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6 pt-12 pb-16">
+      <div class="max-w-2xl">
+        <h1 class="font-heading text-4xl sm:text-5xl font-bold leading-tight mb-6 text-text dark:text-dark-text">
+          Building AI tools that enhance your thinking.
+        </h1>
+        <p class="text-lg sm:text-xl text-text-medium dark:text-dark-text-medium leading-relaxed">
+          Learn about my projects and me.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Entry Points -->
+  <section class="max-w-5xl mx-auto px-6 pt-12 pb-24">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {sections.map(({ href, title, description, icon }) => (
+        <a
+          href={href}
+          class="group block p-6 rounded-[10px] border border-border dark:border-dark-border bg-bg dark:bg-dark-bg hover:bg-bg-sand dark:hover:bg-dark-bg-sand hover:-translate-y-0.5 hover:shadow-md transition-all duration-200"
+        >
+          <div class="flex items-start gap-4">
+            <span class="text-2xl text-accent dark:text-dark-accent mt-0.5" set:html={icon} />
+            <div>
+              <h2 class="font-heading text-lg font-semibold text-text dark:text-dark-text group-hover:text-accent dark:group-hover:text-dark-accent transition-colors mb-1">
+                {title}
+              </h2>
+              <p class="text-sm text-text-medium dark:text-dark-text-medium leading-relaxed">
+                {description}
+              </p>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

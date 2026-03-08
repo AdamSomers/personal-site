@@ -1,0 +1,68 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+interface Props {
+  title: string;
+  status: string;
+  techStack: string[];
+  github?: string;
+  demo?: string;
+  lastUpdated: string;
+}
+
+const { title, status, techStack, github, demo, lastUpdated } = Astro.props;
+
+const statusColors: Record<string, string> = {
+  active: 'bg-accent-secondary/15 text-accent-secondary dark:bg-dark-accent-secondary/15 dark:text-dark-accent-secondary',
+  'in-development': 'bg-accent/15 text-accent dark:bg-dark-accent/15 dark:text-dark-accent',
+  beta: 'bg-accent-subtle/25 text-accent dark:bg-dark-accent-subtle/25 dark:text-dark-accent',
+  paused: 'bg-border/30 text-text-muted dark:bg-dark-border/30 dark:text-dark-text-muted',
+};
+---
+
+<BaseLayout title={`${title} — Adam Somers`} description={`${title} — an AI project by Adam Somers.`}>
+  <div class="max-w-3xl mx-auto px-6 py-12">
+    <Breadcrumb items={[
+      { label: 'Building', href: '/building' },
+      { label: title },
+    ]} />
+
+    <div class="flex items-start justify-between gap-4 mb-6">
+      <h1 class="font-heading text-3xl sm:text-4xl font-bold text-text dark:text-dark-text">
+        {title}
+      </h1>
+      <span class={`text-xs font-medium px-2 py-1 rounded-[3px] whitespace-nowrap mt-2 ${statusColors[status] || statusColors.paused}`}>
+        {status}
+      </span>
+    </div>
+
+    <div class="flex flex-wrap gap-1.5 mb-8">
+      {techStack.map((tech) => (
+        <span class="text-xs px-2 py-0.5 rounded-[3px] bg-bg-deep dark:bg-dark-bg-deep text-text-muted dark:text-dark-text-muted">
+          {tech}
+        </span>
+      ))}
+    </div>
+
+    <article class="prose prose-warm">
+      <slot />
+    </article>
+
+    <div class="mt-10 pt-6 border-t border-border dark:border-dark-border flex items-center gap-6 text-sm">
+      {github && (
+        <a href={github} target="_blank" rel="noopener noreferrer" class="text-accent dark:text-dark-accent hover:underline">
+          GitHub
+        </a>
+      )}
+      {demo && (
+        <a href={demo} target="_blank" rel="noopener noreferrer" class="text-accent dark:text-dark-accent hover:underline">
+          Demo
+        </a>
+      )}
+      <span class="text-text-muted dark:text-dark-text-muted ml-auto">
+        Updated {lastUpdated}
+      </span>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,44 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  hook: string;
+  status: string;
+  techStack: string[];
+}
+
+const { slug, title, hook, status, techStack } = Astro.props;
+
+const statusColors: Record<string, string> = {
+  active: 'bg-accent-secondary/15 text-accent-secondary dark:bg-dark-accent-secondary/15 dark:text-dark-accent-secondary',
+  'in-development': 'bg-accent/15 text-accent dark:bg-dark-accent/15 dark:text-dark-accent',
+  beta: 'bg-accent-subtle/25 text-accent dark:bg-dark-accent-subtle/25 dark:text-dark-accent',
+  paused: 'bg-border/30 text-text-muted dark:bg-dark-border/30 dark:text-dark-text-muted',
+};
+---
+
+<a
+  href={`/building/${slug}`}
+  class="group block p-6 rounded-[10px] border border-border dark:border-dark-border bg-bg dark:bg-dark-bg hover:bg-bg-sand dark:hover:bg-dark-bg-sand hover:-translate-y-0.5 hover:shadow-md transition-all duration-200"
+>
+  <div class="flex items-start justify-between gap-3 mb-3">
+    <h3 class="font-heading text-xl font-semibold text-text dark:text-dark-text group-hover:text-accent dark:group-hover:text-dark-accent transition-colors">
+      {title}
+    </h3>
+    <span class={`text-xs font-medium px-2 py-1 rounded-[3px] whitespace-nowrap ${statusColors[status] || statusColors.paused}`}>
+      {status}
+    </span>
+  </div>
+
+  <p class="text-sm text-text-medium dark:text-dark-text-medium leading-relaxed mb-4">
+    {hook}
+  </p>
+
+  <div class="flex flex-wrap gap-1.5">
+    {techStack.map((tech) => (
+      <span class="text-xs px-2 py-0.5 rounded-[3px] bg-bg-deep dark:bg-dark-bg-deep text-text-muted dark:text-dark-text-muted">
+        {tech}
+      </span>
+    ))}
+  </div>
+</a>

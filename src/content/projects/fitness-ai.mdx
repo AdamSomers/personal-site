@@ -1,0 +1,33 @@
+---
+title: "Fitness AI"
+hook: "A personalized AI fitness trainer that actually remembers your equipment, injuries, and training history."
+status: "active"
+lastUpdated: "2025-03-08"
+techStack: ["Python", "Streamlit", "Claude API", "SQLite"]
+github: "https://github.com/AdamSomers/fitness-app"
+order: 2
+---
+
+## What it is
+
+Fitness AI is a personalized trainer that generates workouts tailored to your goals, equipment, and training history. Not a generic chatbot — a system with persistent context that compounds over time.
+
+## The problem
+
+Generic chatbots forget your equipment, lose track of your progress, and don't know what day it is. Every conversation starts from zero. Real training requires continuity — knowing what you did last week, what's sore, what equipment you have at home versus the gym.
+
+## How it works
+
+- **Profile setup** — fitness goals, available equipment, injuries, training preferences. This context accompanies every AI request.
+- **Training plans** — create plans with session rotations (e.g., Lower/Upper/Full Body). Multiple active plans supported.
+- **AI workout generation** — select a plan, optionally add context ("feeling tired", "want to focus on back"), and Claude generates a workout informed by your full history.
+- **Freeform logging** — after training, enter what you did in natural language ("DL 3x5 @ 155, skipped lunges") and the AI parses it into structured entries.
+- **History & review** — browse past workouts with filtering. Import historical data.
+
+## Why it matters
+
+Same thesis as Lead — AI gets dramatically more useful with persistent, structured context. The "amnesia" problem of generic chatbots is solved by maintaining your profile, plans, and full training history across every interaction.
+
+## Current status
+
+Actively used for personal training. Core features stable. Deployed on Fly.io.

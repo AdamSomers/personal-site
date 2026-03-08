@@ -1,0 +1,27 @@
+---
+const links = [
+  { href: 'https://github.com/AdamSomers', label: 'GitHub' },
+  { href: 'https://www.linkedin.com/in/adam-somers', label: 'LinkedIn' },
+  { href: 'mailto:hello@adamsomers.com', label: 'Email' },
+];
+---
+
+<footer class="border-t border-border dark:border-dark-border mt-auto">
+  <div class="max-w-5xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-sm text-text-muted dark:text-dark-text-muted">
+      Adam Somers
+    </p>
+    <div class="flex gap-6">
+      {links.map(({ href, label }) => (
+        <a
+          href={href}
+          target={href.startsWith('http') ? '_blank' : undefined}
+          rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors"
+        >
+          {label}
+        </a>
+      ))}
+    </div>
+  </div>
+</footer>

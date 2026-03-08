@@ -1,0 +1,34 @@
+---
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="mb-6">
+  <ol class="flex items-center gap-2 text-sm text-text-muted dark:text-dark-text-muted">
+    <li>
+      <a href="/" class="hover:text-accent dark:hover:text-dark-accent transition-colors">Home</a>
+    </li>
+    {items.map((item, i) => (
+      <>
+        <li aria-hidden="true" class="select-none">/</li>
+        <li>
+          {item.href ? (
+            <a href={item.href} class="hover:text-accent dark:hover:text-dark-accent transition-colors">
+              {item.label}
+            </a>
+          ) : (
+            <span class="text-text-medium dark:text-dark-text-medium">{item.label}</span>
+          )}
+        </li>
+      </>
+    ))}
+  </ol>
+</nav>
