@@ -6,7 +6,7 @@ const projects = defineCollection({
     title: z.string(),
     hook: z.string(),
     status: z.enum(['active', 'beta', 'in-development', 'idea', 'paused']),
-    lastUpdated: z.string(),
+    lastUpdated: z.string().optional(),
     techStack: z.array(z.string()),
     github: z.string().url().optional(),
     demo: z.string().url().optional(),
