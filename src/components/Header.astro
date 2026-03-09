@@ -63,11 +63,25 @@ const navLinks = [
 </header>
 
 <script>
-  function initMobileMenu() {
-    document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
-      document.getElementById('mobile-menu')?.classList.toggle('hidden');
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  toggle?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+
+  function updateActiveLink() {
+    const path = window.location.pathname;
+    menu?.classList.add('hidden');
+
+    document.querySelectorAll('header a[href]').forEach((link) => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+      const isActive = path === href || (href !== '/' && path.startsWith(href));
+      link.classList.toggle('text-accent', isActive);
+      link.classList.toggle('text-text-medium', !isActive);
     });
   }
-  initMobileMenu();
-  document.addEventListener('astro:after-swap', initMobileMenu);
+
+  document.addEventListener('astro:after-swap', updateActiveLink);
 </script>
