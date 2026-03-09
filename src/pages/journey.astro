@@ -97,18 +97,6 @@ const timeline = [
 </BaseLayout>
 
 <script>
-  // Expand/collapse — redraw connector after toggle
-  document.querySelectorAll('[data-timeline-trigger]').forEach((trigger) => {
-    trigger.addEventListener('click', () => {
-      const node = trigger.closest('[data-timeline-node]');
-      const detail = node?.querySelector('[data-timeline-detail]');
-      if (detail) {
-        detail.classList.toggle('hidden');
-        requestAnimationFrame(drawAllConnectors);
-      }
-    });
-  });
-
   function drawAllConnectors() {
     document.querySelectorAll('[data-sine-connector]').forEach((svg) => {
       const h = svg.getBoundingClientRect().height;
@@ -138,6 +126,21 @@ const timeline = [
     });
   }
 
-  drawAllConnectors();
+  function initJourney() {
+    document.querySelectorAll('[data-timeline-trigger]').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const node = trigger.closest('[data-timeline-node]');
+        const detail = node?.querySelector('[data-timeline-detail]');
+        if (detail) {
+          detail.classList.toggle('hidden');
+          requestAnimationFrame(drawAllConnectors);
+        }
+      });
+    });
+    drawAllConnectors();
+  }
+
+  initJourney();
   window.addEventListener('resize', drawAllConnectors);
+  document.addEventListener('astro:after-swap', initJourney);
 </script>

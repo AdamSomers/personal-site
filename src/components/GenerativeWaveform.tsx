@@ -99,7 +99,8 @@ export default function GenerativeWaveform() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 w-full h-full pointer-events-none opacity-0 animate-[fadeIn_1.5s_ease_forwards]"
+      style={{ animationDelay: '0.1s' }}
       aria-hidden="true"
     />
   );

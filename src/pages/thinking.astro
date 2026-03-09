@@ -58,16 +58,20 @@ const cards = [
 </BaseLayout>
 
 <script>
-  document.querySelectorAll('[data-thinking-trigger]').forEach((trigger) => {
-    trigger.addEventListener('click', () => {
-      const card = trigger.closest('[data-thinking-card]');
-      const detail = card?.querySelector('[data-thinking-detail]');
-      const chevron = card?.querySelector('[data-thinking-chevron]');
-      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+  function initThinkingCards() {
+    document.querySelectorAll('[data-thinking-trigger]').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const card = trigger.closest('[data-thinking-card]');
+        const detail = card?.querySelector('[data-thinking-detail]');
+        const chevron = card?.querySelector('[data-thinking-chevron]');
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
 
-      trigger.setAttribute('aria-expanded', String(!isOpen));
-      detail?.classList.toggle('hidden');
-      chevron?.classList.toggle('rotate-180');
+        trigger.setAttribute('aria-expanded', String(!isOpen));
+        detail?.classList.toggle('hidden');
+        chevron?.classList.toggle('rotate-180');
+      });
     });
-  });
+  }
+  initThinkingCards();
+  document.addEventListener('astro:after-swap', initThinkingCards);
 </script>
