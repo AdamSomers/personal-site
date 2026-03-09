@@ -55,9 +55,16 @@ const { title, description = 'Adam Somers. Engineering leader building AI tools 
               observer.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' });
 
         elements.forEach(el => observer.observe(el));
+
+        // Safety net: reveal any still-hidden elements after 2s
+        setTimeout(() => {
+          document.querySelectorAll('[data-animate]:not(.animate-visible)').forEach(el => {
+            el.classList.add('animate-visible');
+          });
+        }, 2000);
       }
 
       initScrollAnimations();
