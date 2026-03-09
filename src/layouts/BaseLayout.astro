@@ -57,14 +57,12 @@ const { title, description = 'Adam Somers. Engineering leader building AI tools 
           });
         }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' });
 
-        elements.forEach(el => observer.observe(el));
-
-        // Safety net: reveal any still-hidden elements after 2s
-        setTimeout(() => {
-          document.querySelectorAll('[data-animate]:not(.animate-visible)').forEach(el => {
-            el.classList.add('animate-visible');
-          });
-        }, 2000);
+        // JS marks elements as ready for animation, then observes them.
+        // If JS fails, elements stay visible (no opacity:0 in CSS alone).
+        elements.forEach(el => {
+          el.classList.add('animate-ready');
+          observer.observe(el);
+        });
       }
 
       initScrollAnimations();
